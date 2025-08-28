@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}F1 Wiki{% endblock %}</title>
+
+</head>
+<body>
+
+    <nav>
+        <div>
+            <a href="/">Main</a>
+            <a href="{% url 'home' %}">Home</a>
+
+                        {% if user.is_authenticated %}
+            <a href="{% url 'add_driver' %}">Add a Driver</a>
+            <form action = "{% url 'logout' %}" method="post" style="display: inline!important;" >
+            {% csrf_token %}
+            <button type="submit" style="
+                          background: none!important;
+                          border: none;
+                          padding: 0!important;
+                          /*optional*/
+                          font-family: arial, sans-serif;
+                          /*input has OS specific font-family*/
+                          color: #069;
+                          text-decoration: underline;
+                          cursor: pointer;
+                        ">Logout</button>
+
+            {% else %}
+            <a href="{% url 'login' %}" >Login</a>
+            <a href="{% url 'register' %}" >Register</a>
+            {% endif %}
+            </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        
+        {% endblock %}
+    </div>

@@ -1,0 +1,110 @@
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<img src="{% static 'race-track.png' %}" class="race-track">
+<div  class='register'>
+    <img src="{% static 'register-icon.png' %}" class="register-icon">
+    <h2 class="register-h2"></h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <button type="submit" class="register-button">Register</button>
+    </form>
+</div>
+{% endblock %}
+
+<style>
+
+.register input {
+    width: 80%;
+    padding: 6px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+
+}
+
+.register label {
+
+    margin-bottom: 5px;
+    display: block;
+
+
+}
+
+.register {
+    background-color: white;
+    padding: 90px 44px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 434px;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 10px 20px rgba(2, 128, 144, 0.2);
+    text-align: center;
+    opacity: 90%;
+
+}
+
+.register-h2 {
+    margin-bottom:20px;
+    color: rgb(69, 125, 144)
+}
+
+.register-button {
+    width: 110px;
+    padding: 6px;
+    border: none;
+    border-radius: 22px;
+    margin-top: 10px;
+    color: black;
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    opacity: 80%;
+}
+
+.register-button:hover {
+    background-color: rgb(255, 30, 0, 1);
+    opacity: 90%;
+
+}
+
+body {
+    background: #FF1E00;
+    background: linear-gradient(180deg, rgba(255, 30, 0, 1) 0%, rgba(0, 0, 0, 1) 88%);
+    font-family: 'Asap', sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+.helptext{
+    display: block;
+
+}
+
+.register-icon{
+     width:72px;
+     position: absolute;
+     height: auto;
+     right: 50%;
+     bottom: 85%;
+     left: 39%;
+
+}
+
+.race-track{
+    width: 700px;
+    right: 27%;
+    position: absolute;
+    bottom: 17%;
+    opacity: 40%;
+}
+</style>

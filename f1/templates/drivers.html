@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %} The Drivers {% endblock %}
+
+{% block content %}
+
+<ul>
+
+  {% for driver in drivers %}
+    <li>{{ driver }}</li>
+  {% endfor %}
+
+</ul>
+
+{% endblock %}
+
+

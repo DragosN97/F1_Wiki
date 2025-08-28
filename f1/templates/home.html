@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block title %} F1 Wiki {% endblock %}
+
+{% block content %}
+
+<p>Hello {{ user.username }}. This is F1 Wiki page</p>
+
+<ul>
+
+  {% for driver in drivers %}
+  <li>{{driver}}, added by <a href=""></a></li>
+  {% endfor %}
+
+</ul>
+
+{% endblock %}

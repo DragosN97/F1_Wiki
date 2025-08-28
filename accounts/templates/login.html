@@ -1,0 +1,132 @@
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<img src="{% static 'race-track.png' %}" class="race-track">
+<div class="login">
+    <img src="{% static 'f1_logo_login.png' %}" class="logo">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p class="login-q">You don't have an account?</p>
+    <div class="register-wrapper">
+        <a href="{% url 'register' %}" class="register-btn" >Register</a>
+    </div>
+
+</div>
+<style>
+
+.race-track{
+    width: 700px;
+    right: 27%;
+    position: absolute;
+    bottom: 17%;
+    opacity: 40%;
+
+
+}
+
+.logo{
+     width:100px;
+     position: absolute;
+     height: auto;
+     right: 50%;
+     bottom: 78%;
+     left: 32%;
+    }
+
+.login-q{
+     margin-top: 110px;
+     top: 50%;
+     lef: 50%;
+    }
+
+
+ .login input[type="text"],
+ .login input[type="password"] {
+    width: 80%;
+    padding: 6px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+
+    }
+    body {
+  background: #FF1E00;
+  background: linear-gradient(180deg, rgba(255, 30, 0, 1) 0%, rgba(0, 0, 0, 1) 88%);
+  font-family: 'Asap', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login {
+  background-color: white;
+  padding: 100px 25px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 10px 20px rgba(2, 128, 144, 0.2);
+  text-align: center;
+  opacity: 90%;
+}
+
+.login h2 {
+  margin-bottom: 20px;
+  color: rgb(69, 105, 144);
+}
+
+.login button {
+  width: 50%;
+  padding: 6px;
+  border: none;
+  border-radius: 22px;
+  margin-top: 10px;
+  color: black;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  opacity: 80%;
+
+}
+
+.login button:hover {
+  background-color: rgb(255, 30, 0, 1);
+  opacity: 80%;
+}
+
+.register-wrapper {
+    margin-top: 20px;
+    text-align: center;
+    opacity: 90%;
+    }
+
+
+.register-btn{
+    width: 30%;
+    padding: 9px;
+    border: none;
+    border-radius: 20px;
+    color: black;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    text-decoration: none;
+    }
+
+.register-btn:hover {
+  background-color: rgb(255, 30, 0, 1);
+  opacity: 90%;
+}
+</style>
+{% endblock %}
