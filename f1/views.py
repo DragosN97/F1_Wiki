@@ -3,6 +3,10 @@ import json
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from datetime import datetime
+
+from pandas.io.formats.format import return_docstring
+from rest_framework.generics import get_object_or_404
+
 from f1.models import models
 from f1.models import Driver
 from f1.forms import DriverForm
@@ -35,7 +39,7 @@ class DriverViewSet(viewsets.ModelViewSet):
     serializer_class = DriverSerializer
 
 
-@csrf_exempt
+
 @login_required()
 def add_driver(request):
     if request.method == "GET":
@@ -45,12 +49,12 @@ def add_driver(request):
         return render(request, 'add_driver.html', context)
 
     elif request.method == "POST":
-        form_data = DriverForm(request.POST)
+        form_data = DriverForm(request.POST, request.FILES)
         if form_data.is_valid():
             driver_instance = form_data.save(commit=False)
             driver_instance.created_by = request.user
             driver_instance.save()
-            return redirect('drivers')
+            return redirect('home')
         else:
             return HttpResponse(form_data.errors)
 
@@ -61,6 +65,30 @@ def driver_by_user(request, user_id: int):
         'drivers': drivers
     }
     return render(request, 'drivers.html', context)
+
+@login_required
+def update_driver(request, pk):
+    driver = get_object_or_404(Driver, pk=pk, created_by=request.user)
+    if request.method == 'POST':
+        form = DriverForm(request.POST, request.FILES, instance=driver)
+        if form.is_valid():
+            form.save()
+        return redirect('home')
+    else:
+        form = DriverForm(instance=driver)
+        return render(request, 'update_driver.html', {'form': form, 'driver': driver})
+
+@login_required
+
+def delete_driver(request, pk):
+    driver = get_object_or_404(Driver, pk=pk, created_by = request.user)
+    if request.method == "POST":
+        driver.delete()
+        return redirect('home')
+    else:
+        return render(request, 'driver_confirmation_delete.html', {'driver': driver})
+
+
 
 
 

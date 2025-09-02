@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+
+{% block title %}Confirmation Delete{% endblock %}
+
+{% block content %}
+
+  <p>Are you sure you want to delete this Driver?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+  </form>
+
+{% endblock %}
