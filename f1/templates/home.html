@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<p>Hello {{ user.username }}. This is F1 Wiki page</p>
+<p>Hello {{ user.username }}</p>
 
 <div class="drivers-container" >
   {% for driver in drivers %}
@@ -13,10 +13,10 @@
             <img src="{{ driver.image.url }}" alt="Thumbnail for {{ driver.title }}" width="250" />
       {% endif %}
 
-  <h2>{{ driver.name }} </h2>
-  <p>{{ driver.team }}</p>
-  <p>{{ driver.age }}</p>
-  <p>added by: <a href="'{% url 'driver_by_user' user_id=driver.created_by.id %}">{{driver.created_by}}</a></p>
+      <h2>{{ driver.name }} </h2>
+      <p>{{ driver.team }}</p>
+      <p>{{ driver.age }}</p>
+      <p>added by: <a href="{% url 'driver_by_user' user_id=driver.created_by.id %}">{{driver.created_by}}</a></p>
 
 
       <a href="{% url 'update_driver' pk=driver.id %}" style="text-decoration: none;" >✍️</a>
@@ -28,16 +28,9 @@
 
 
 <style>
-
-
-body {
-    background: #FF1E00;
-    background: linear-gradient(180deg, rgba(255, 30, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 88%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
+h2{
+color:white;
 }
-
 
 .drivers-container {
     display: flex;
@@ -55,11 +48,18 @@ body {
     background-color: #fff;
     transition: transform 0.2s, box-shadow 0.2s;
     padding-bottom: 45px;
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 
   }
 .driver-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+    transition: filter 0.2s ease;
   }
 .driver-card img {
     width: 70%;
@@ -78,7 +78,7 @@ body {
 
 .driver-card p {
     margin: 2px 0;
-    color: #555;
+    color: white;
     font-size: 0.9em;
   }
 </style>
