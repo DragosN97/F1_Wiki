@@ -39,6 +39,13 @@ class DriverViewSet(viewsets.ModelViewSet):
     queryset = Driver.objects.all()
     serializer_class = DriverSerializer
 
+def driver_by_user(request, user_id: int):
+    drivers = list(Driver.objects.filter(created_by=user_id))
+    drivers.sort(key=(lambda x: x.existing_like), reverse=True)
+    context = {
+        'drivers': drivers
+    }
+    return render(request, 'drivers.html', context)
 
 
 @login_required()
@@ -59,26 +66,6 @@ def add_driver(request):
         else:
             return HttpResponse(form_data.errors)
 
-def driver_by_user(request, user_id: int):
-    drivers = list(Driver.objects.filter(created_by=user_id))
-    drivers.sort(key=(lambda x: x.date_created), reverse=True)
-    context = {
-        'drivers': drivers
-    }
-    return render(request, 'drivers.html', context)
-
-@login_required
-def update_driver(request, pk):
-    driver = get_object_or_404(Driver, pk=pk, created_by=request.user)
-    if request.method == 'POST':
-        form = DriverForm(request.POST, request.FILES, instance=driver)
-        if form.is_valid():
-            form.save()
-        return redirect('home')
-    else:
-        form = DriverForm(instance=driver)
-        return render(request, 'update_driver.html', {'form': form, 'driver': driver})
-
 @login_required
 def delete_driver(request, pk):
     driver = get_object_or_404(Driver, pk=pk, created_by = request.user)
@@ -95,6 +82,20 @@ def driver_detail(request, pk):
             'driver': driver
         }
         return render(request, 'driver_detail.html', context)
+
+@login_required
+def update_driver(request, pk):
+    driver = get_object_or_404(Driver, pk=pk, created_by=request.user)
+    if request.method == 'POST':
+        form = DriverForm(request.POST, request.FILES, instance=driver)
+        if form.is_valid():
+            form.save()
+        return redirect('home')
+    else:
+        form = DriverForm(instance=driver)
+        return render(request, 'update_driver.html', {'form': form, 'driver': driver})
+
+
 
 
 
