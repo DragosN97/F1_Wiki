@@ -16,3 +16,7 @@ class Driver(models.Model):
 
 # def __str__(self):
 #     return f'Name: {self.name} Team: {self.team} Age: {self.age}'
+
+class Like(models.Model):
+    user_like = models.ForeignKey(User, on_delete=models.CASCADE)
+    driver_like = models.ForeignKey(Driver, on_delete=models.CASCADE)

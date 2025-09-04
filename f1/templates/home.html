@@ -8,11 +8,11 @@
 
 <div class="drivers-container" >
   {% for driver in drivers %}
+  <a href="{% url 'driver_detail' driver.pk %}" class="driver-detail">
     <div class="driver-card">
         {% if driver.image %}
-            <img src="{{ driver.image.url }}" alt="Thumbnail for {{ driver.title }}" width="250" />
+            <img src="{{ driver.image.url }}" alt="Thumbnail for {{ driver.title }}" width="200" />
       {% endif %}
-
       <h2>{{ driver.name }} </h2>
       <p>{{ driver.team }}</p>
       <p>{{ driver.age }}</p>
@@ -22,14 +22,22 @@
       <a href="{% url 'update_driver' pk=driver.id %}" style="text-decoration: none;" >✍️</a>
         <a href="{% url 'driver_confirmation_delete' pk=driver.id %}" style="text-decoration: none;">🗑️</a>
 
-  </div>
+    </div>
+  </a>
   {% endfor %}
 </div>
 
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+.driver-detail {
+    text-decoration: none;
+    color: inherit;
+}
 h2{
 color:white;
+font-family: "Orbitron", sans-serif;
 }
 
 .drivers-container {
@@ -40,6 +48,7 @@ color:white;
   }
 
 .driver-card {
+
     width: 230px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -81,6 +90,10 @@ color:white;
     color: white;
     font-size: 0.9em;
   }
+
+p{
+font-family: "Orbitron", sans-serif;
+}
 </style>
 
 {% endblock %}

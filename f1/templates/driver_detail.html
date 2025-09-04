@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block title %} {{ driver.name }} {% endblock %}
+
+{% block content %}
+
+<div class="driver-detail">
+
+    <h1>{{ driver.name }}</h1>
+    <div >
+        <img src="{{ driver.image.url }}" alt="{{ driver.name }}" class="driver-detail-img">
+    </div>
+    <p>Team: {{ driver.team }}</p>
+    <p>Age: {{ driver.age }}</p>
+    <p>About: {{ driver.about }}</p>
+
+</div>
+
+<style>
+.driver-detail-img{
+   margin-top: 20px;
+   width:150px;
+   height:auto;
+}
+</style>
+
+
+{% endblock %}
+

@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.gis.shortcuts import render_to_kml
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from datetime import datetime
@@ -21,7 +22,7 @@ def main(request):
 def home(request):
 
     drivers = list(Driver.objects.all())
-    drivers.sort(key=(lambda x: x.date_created), reverse=True)
+    drivers.sort(key=(lambda x: x.name))
 
     context = {
 
@@ -79,7 +80,6 @@ def update_driver(request, pk):
         return render(request, 'update_driver.html', {'form': form, 'driver': driver})
 
 @login_required
-
 def delete_driver(request, pk):
     driver = get_object_or_404(Driver, pk=pk, created_by = request.user)
     if request.method == "POST":
@@ -87,6 +87,15 @@ def delete_driver(request, pk):
         return redirect('home')
     else:
         return render(request, 'driver_confirmation_delete.html', {'driver': driver})
+
+def driver_detail(request, pk):
+    if request.method == "GET":
+        driver = get_object_or_404(Driver, pk=pk)
+        context = {
+            'driver': driver
+        }
+        return render(request, 'driver_detail.html', context)
+
 
 
 
