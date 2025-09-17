@@ -46,6 +46,7 @@ class DriverViewSet(viewsets.ModelViewSet):
     serializer_class = DriverSerializer
 
 def driver_by_user(request, user_id: int):
+    '''Driver list sorted by user.'''
     drivers = list(Driver.objects.filter(created_by=user_id))
     drivers.sort(key=(lambda x: x.date_created), reverse=True)
     context = {
@@ -56,6 +57,7 @@ def driver_by_user(request, user_id: int):
 
 @login_required()
 def add_driver(request):
+    '''Add a driver method'''
     if request.method == "GET":
         context = {
             'form': DriverForm()
@@ -74,6 +76,7 @@ def add_driver(request):
 
 @login_required
 def delete_driver(request, pk):
+    '''Delete a driver method'''
     driver = get_object_or_404(Driver, pk=pk)
     context = {
         'driver': driver,
@@ -95,6 +98,7 @@ def delete_driver(request, pk):
 
 
 def driver_detail(request, pk):
+    '''Driver page with all the details'''
     if request.method == "GET":
         driver = get_object_or_404(Driver, pk=pk)
         context = {
@@ -104,6 +108,7 @@ def driver_detail(request, pk):
 
 @login_required
 def update_driver(request, pk):
+    '''Update or modify the driver method'''
     driver = get_object_or_404(Driver, pk=pk, created_by=request.user)
     if request.method == 'POST':
         form = DriverForm(request.POST, request.FILES, instance=driver)
