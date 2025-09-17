@@ -57,7 +57,7 @@ def driver_by_user(request, user_id: int):
 
 @login_required()
 def add_driver(request):
-    '''Add a driver method'''
+    '''Add a driver method.'''
     if request.method == "GET":
         context = {
             'form': DriverForm()
