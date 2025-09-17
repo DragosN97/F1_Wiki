@@ -21,8 +21,12 @@ def main(request):
 
 def home(request):
 
-    drivers = list(Driver.objects.all())
-    drivers.sort(key=(lambda x: x.name))
+    sort_by = request.GET.get('sort_by', 'name')
+
+    if sort_by == 'date':
+        drivers = Driver.objects.all().order_by('date_created').reverse()
+    else:
+        drivers = Driver.objects.all().order_by('name')
 
     context = {
 
@@ -30,6 +34,7 @@ def home(request):
         'logged_in': request.user.is_authenticated,
         'current_time': datetime.now(),
         'drivers': drivers,
+        'sort_by': sort_by
 
     }
 
@@ -41,7 +46,7 @@ class DriverViewSet(viewsets.ModelViewSet):
 
 def driver_by_user(request, user_id: int):
     drivers = list(Driver.objects.filter(created_by=user_id))
-    drivers.sort(key=(lambda x: x.existing_like), reverse=True)
+    drivers.sort(key=(lambda x: x.date_created), reverse=True)
     context = {
         'drivers': drivers
     }

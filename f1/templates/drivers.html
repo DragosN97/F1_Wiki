@@ -1,17 +1,93 @@
 {% extends 'main.html' %}
 
-{% block title %} The Drivers {% endblock %}
+{% block title %} Drivers by User {% endblock %}
 
 {% block content %}
 
-<ul>
+{% if drivers %}
+    <h1>Drivers created by {{ drivers.0.created_by.username }}</h1>
+{% else %}
+    <h1>Drivers created by this user</h1>
+{% endif %}
 
+<div class="drivers-container">
   {% for driver in drivers %}
-    <li>{{ driver }}</li>
-  {% endfor %}
+  <a href="{% url 'driver_detail' driver.pk %}" class="driver-detail">
+    <div class="driver-card">
+      {% if driver.image %}
+        <img src="{{ driver.image.url }}" alt="Thumbnail for {{ driver.name }}" />
+      {% endif %}
+      <h2>{{ driver.name }}</h2>
+      <p>Team: {{ driver.team }}</p>
+      <p>Age: {{ driver.age }}</p>
+    </div>
 
-</ul>
+  </a>
+  {% endfor %}
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+.driver-detail {
+    text-decoration: none;
+    color: inherit;
+}
+
+h2 {
+    color: white;
+    font-family: "Orbitron", sans-serif;
+}
+
+.drivers-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.driver-card {
+    width: 230px;
+    height: 350px;
+    border-radius: 10px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 45px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+  }
+.driver-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+    transition: filter 0.2s ease;
+  }
+
+.driver-card img {
+    width: 70%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 15px 0 10px 0;
+}
+
+.driver-card h2 {
+    font-size: 1.1em;
+    margin: 5px 0;
+  }
+
+.driver-card p {
+    margin: 2px 0;
+    color: white;
+    font-size: 0.9em;
+  }
+</style>
 
 {% endblock %}
-
-

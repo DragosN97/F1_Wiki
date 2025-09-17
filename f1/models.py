@@ -14,5 +14,5 @@ class Driver(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to='driver_image/', blank=True, null=True)
 
-# def __str__(self):
-#     return f'Name: {self.name} Team: {self.team} Age: {self.age}'
+    def __str__(self):
+        return f'Name: {self.name} Team: {self.team} Age: {self.age}'

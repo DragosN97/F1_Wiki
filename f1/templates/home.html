@@ -6,6 +6,14 @@
 
 <p>Hello {{ user.username }}</p>
 
+<form method = 'get' action="">
+  <labe for="sort_by" class="sort-container">Sort Drivers:</labe>
+  <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+    <option value="name" {% if sort_by == "name" %}selected{% endif %}>Name</option>
+    <option value="date" {% if sort_by == "date" %}selected{% endif %}>Date</option>
+  </select>
+</form>
+
 <div class="drivers-container" >
   {% for driver in drivers %}
   <a href="{% url 'driver_detail' driver.pk %}" class="driver-detail">
@@ -32,16 +40,22 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
+.sort-container{
+    font-family: Orbitron;
+    font-size: 10px;
+}
+
 .driver-detail {
     text-decoration: none;
     color: inherit;
 }
 h2{
-color:white;
-font-family: "Orbitron", sans-serif;
+  color:white;
+  font-family: "Orbitron", sans-serif;
 }
 
 .drivers-container {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
