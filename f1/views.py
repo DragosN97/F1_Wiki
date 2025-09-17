@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from f1.serializers import DriverSerializer
 from rest_framework import viewsets
+from django.contrib import messages
 
 def main(request):
     return render(request, 'main.html', {"message": "This is the main page for F1 Drivers Wiki"})
@@ -73,12 +74,25 @@ def add_driver(request):
 
 @login_required
 def delete_driver(request, pk):
-    driver = get_object_or_404(Driver, pk=pk, created_by = request.user)
+    driver = get_object_or_404(Driver, pk=pk)
+    context = {
+        'driver': driver,
+        'message': 'This is not your driver'
+    }
+    # If someone try to delete another driver:
+    if driver.created_by != request.user:
+        return render(request, 'driver_error_delete.html', context)
+
+    # If it's the same user:
     if request.method == "POST":
         driver.delete()
         return redirect('home')
     else:
         return render(request, 'driver_confirmation_delete.html', {'driver': driver})
+
+
+
+
 
 def driver_detail(request, pk):
     if request.method == "GET":

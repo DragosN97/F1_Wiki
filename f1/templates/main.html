@@ -48,12 +48,48 @@
 
     <div class="container">
         {% block content %}
-        
+        <div class="intro-text">
+            <h1>🏎️ Welcome to the F1 Wiki! 🏁</h1>
+            <h2>Discover amazing drivers and their stories.
+            <br>
+    To add a new driver, please login and hit the "+" button!</h2>
+            <br>
+            <h2>New here? Register to make your own driver</h2>
+        </div>
         {% endblock %}
     </div>
 
     <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
+        .intro-text {
+    text-align: center;
+    margin: 160px 20px;
+    color: #fff;
+}
+
+.intro-text h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5em;
+    background: linear-gradient(90deg,rgba(179, 131, 59, 1) 0%, rgba(237, 173, 83, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.intro-text h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #EDDD53;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 body {
     background: #FF1E00;
