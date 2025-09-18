@@ -4,26 +4,75 @@
 
 {% block content %}
 
-<div class="driver-detail">
-
-    <h1>{{ driver.name }}</h1>
-    <div >
-        <img src="{{ driver.image.url }}" alt="{{ driver.name }}" class="driver-detail-img">
+<div class="driver-detail-container">
+    <div class="driver-detail-card">
+        <h1 class="driver-name">{{ driver.name }}</h1>
+        {% if driver.image %}
+        <div class="driver-image-wrapper">
+            <img src="{{ driver.image.url }}" alt="{{ driver.name }}" class="driver-detail-img">
+        </div>
+        {% endif %}
+        <div class="driver-info">
+            <p><strong>Team:</strong> {{ driver.team }}</p>
+            <p><strong>Age:</strong> {{ driver.age }}</p>
+            <p><strong>About:</strong> {{ driver.about }}</p>
+        </div>
     </div>
-    <p>Team: {{ driver.team }}</p>
-    <p>Age: {{ driver.age }}</p>
-    <p>About: {{ driver.about }}</p>
-
 </div>
 
 <style>
-.driver-detail-img{
-   margin-top: 20px;
-   width:150px;
-   height:auto;
+
+.driver-detail-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+
+.driver-detail-card {
+    max-width: 500px;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+
+.driver-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: white;
+}
+
+
+.driver-image-wrapper {
+    margin-bottom: 20px;
+}
+
+.driver-detail-img {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+
+.driver-info p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1em;
+    color: white;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.driver-info strong {
+    color: #ffd700; /* aur pentru accent */
 }
 </style>
 
-
 {% endblock %}
-

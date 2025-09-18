@@ -94,9 +94,6 @@ def delete_driver(request, pk):
         return render(request, 'driver_confirmation_delete.html', {'driver': driver})
 
 
-
-
-
 def driver_detail(request, pk):
     '''Driver page with all the details'''
     if request.method == "GET":
