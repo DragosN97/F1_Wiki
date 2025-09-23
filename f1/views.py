@@ -106,7 +106,14 @@ def driver_detail(request, pk):
 @login_required
 def update_driver(request, pk):
     '''Update or modify the driver method'''
-    driver = get_object_or_404(Driver, pk=pk, created_by=request.user)
+    driver = get_object_or_404(Driver, pk=pk)
+    context = {
+        'driver': driver,
+        'message': "You can't edit this Driver. It's not yours."
+    }
+    # If someone try to delete another driver:
+    if driver.created_by != request.user:
+        return render(request, 'driver_error_delete.html', context)
     if request.method == 'POST':
         form = DriverForm(request.POST, request.FILES, instance=driver)
         if form.is_valid():
