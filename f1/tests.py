@@ -45,10 +45,11 @@ def test_driver_str(driver_obj):
 
 @pytest.mark.django_db
 def test_delete_driver_confirmation_page(logged_in_client, driver_obj):
-    url = 'drivers/{}/delete/'.format(driver_obj.pk)
+    url = '/drivers/{}/delete/'.format(driver_obj.pk)
     response = logged_in_client.get(url)
     assert response.status_code == 200
-    assert "Are you sure you want to delete this driver?" in response.text
+    assert "Are you sure you want to delete this Driver?" in response.text
+
 
 
 
