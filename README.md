@@ -15,7 +15,7 @@ The app also includes pages for all drivers created by a specific user.
 - Delete confirmation page
 - Dedicated detail pages for each driver
 - List of drivers filtered by user
-- Automated tests with **pytest** + **pytest-django**
+- Testing with **pytest** + **pytest-django**
 
 ---
 
@@ -70,33 +70,52 @@ http://127.0.0.1:8000/
 
 💻 Running in PyCharm
 
-1. Open the project in PyCharm.
-2. Go to File → Settings → Project → Python Interpreter and select .venv.
+1. Open the project in **PyCharm**.
+2. Go to **File** → **Settings** → **Project** → **Python Interpreter** and select **.venv.**
 3. Run:
-   - manage.py runserver to start the application
-   
-
-4. You can also configure quick runs:
-   - Run → Edit Configurations
-   - Add a new Django Server for manage.py runserver.
+   - ```manage.py runserver``` to start the application
 
 
 ### 8. Project Structure
 ```
 F1_Wiki/
-│── f1/                  
-│   ├── templates/        
+│── accounts/                  # Account Folder
+│   ├── templates/  
+│   │   ├── login.html
+│   │   └── register.html  
+│   ├── static/
+│   ├── views.py
+│   ├── models.py
+│   └── urls.py
+
+│── F1_Wiki/                   # Backend / Django project settings
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+
+│── f1/                        # Main App
+│   ├── templates/f1/          
 │   │   ├── home.html
+│   │   ├── main.htm
+│   │   ├── add_driver.html
 │   │   ├── drivers.html
 │   │   ├── driver_detail.html
 │   │   ├── driver_confirmation_delete.html
-│   │   └── driver_error_delete.html
-│   ├── static/           
-│   ├── views.py          
-│   ├── models.py         
-│   └── tests.py          
-│
+│   │   ├── update driver.html
+│   │   └── driver_error_delete.html         
+│   ├── views.py
+│   ├── models.py
+│   ├── urls.py
+│   └── tests.py   
+
+
+
+│── media/                     # Driver Images
+├── pytest.ini
 ├── manage.py             
 ├── requirements.txt      
-└── README.md             
+└── README.md   
+           
 ```
