@@ -111,7 +111,7 @@ def update_driver(request, pk):
         'driver': driver,
         'message': "You can't edit this Driver. It's not yours."
     }
-    # If someone try to delete another driver:
+    # If someone try to update another driver:
     if driver.created_by != request.user:
         return render(request, 'driver_error_delete.html', context)
     if request.method == 'POST':
