@@ -27,8 +27,8 @@
       <p>added by: <a href="{% url 'driver_by_user' user_id=driver.created_by.id %}">{{driver.created_by}}</a></p>
 
 
-      <a href="{% url 'update_driver' pk=driver.id %}" style="text-decoration: none;" >✍️</a>
-        <a href="{% url 'driver_confirmation_delete' pk=driver.id %}" style="text-decoration: none;">🗑️</a>
+      <a href="{% url 'update_driver' pk=driver.id %}" style="text-decoration: none;" >✏️</a>
+        <a href="{% url 'driver_confirmation_delete' pk=driver.id %}" style="text-decoration: none;">❌</a>
 
 
     </div>
